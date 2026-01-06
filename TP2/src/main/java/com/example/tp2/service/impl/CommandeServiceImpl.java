@@ -10,6 +10,7 @@ import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Service
 public class CommandeServiceImpl implements CommandeService {
@@ -70,8 +71,10 @@ public class CommandeServiceImpl implements CommandeService {
         }
     }
 
-    
-
+    @Override
+    public List<Commande> findByEtatCommandeCode(String code) {
+        return commandeDao.findByEtatCommandeCode(code);
+    }
 
 }
 

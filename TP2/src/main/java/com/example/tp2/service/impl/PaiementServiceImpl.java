@@ -5,6 +5,8 @@ import com.example.tp2.entity.Paiement;
 import com.example.tp2.service.facade.PaiementService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PaiementServiceImpl implements PaiementService {
     private PaiementDao paiementDao;
@@ -25,6 +27,16 @@ public class PaiementServiceImpl implements PaiementService {
             paiementDao.save(paiement);
             return 1;
         }
+    }
+
+    @Override
+    public List<Paiement> findByCommandeReference(String commandeReference) {
+        return paiementDao.findByCommandeReference(commandeReference);
+    }
+
+    @Override
+    public int deleteByCommandeReference(String reference) {
+        return paiementDao.deleteByCommandeReference(reference);
     }
 
 }
