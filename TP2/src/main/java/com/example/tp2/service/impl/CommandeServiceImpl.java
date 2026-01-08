@@ -25,6 +25,11 @@ public class CommandeServiceImpl implements CommandeService {
     }
 
     @Override
+    public List<Commande> findAll() {
+        return commandeDao.findAll();
+    }
+
+    @Override
     public Commande findByReference(String reference) {
         return commandeDao.findByReference(reference);
     }
@@ -41,8 +46,8 @@ public class CommandeServiceImpl implements CommandeService {
     }
 
     @Override
-    public int payer(String commandeReference, Paiement paiement) {
-        Commande commande = findByReference(commandeReference);
+    public int payer(String reference, Paiement paiement) {
+        Commande commande = findByReference(reference);
         if (commande == null) return -1;
         else if (paiement.getMontant().add(commande.getTotalPaye()).compareTo(commande.getTotal()) > 0) return -2;
         else {
@@ -62,8 +67,8 @@ public class CommandeServiceImpl implements CommandeService {
 
     @Transactional
     @Override
-    public int deleteByReference(String commandeReference) {
-        Commande commande = findByReference(commandeReference);
+    public int deleteByReference(String reference) {
+        Commande commande = findByReference(reference);
         if (commande.getTotalPaye().compareTo(BigDecimal.ZERO) != 0) return -1;
         else {
             commandeDao.delete(commande);
@@ -72,8 +77,8 @@ public class CommandeServiceImpl implements CommandeService {
     }
 
     @Override
-    public List<Commande> findByEtatCommandeCode(String code) {
-        return commandeDao.findByEtatCommandeCode(code);
+    public List<Commande> findByEtatCommandeCode(String etatCommandeCode) {
+        return commandeDao.findByEtatCommandeCode(etatCommandeCode);
     }
 
 }

@@ -7,13 +7,15 @@ import jakarta.transaction.Transactional;
 import java.util.List;
 
 public interface CommandeService {
+    List<Commande> findAll();
+
     Commande findByReference(String reference);
     int save(Commande commande);
 
-    int payer(String commandeReference, Paiement paiement);
+    int payer(String reference, Paiement paiement);
 
     @Transactional
-    int deleteByReference(String commandeReference);
+    int deleteByReference(String reference);
 
     List<Commande> findByEtatCommandeCode(String code);
 }

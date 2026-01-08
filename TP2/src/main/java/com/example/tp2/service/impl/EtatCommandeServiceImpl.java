@@ -38,6 +38,4 @@ public class EtatCommandeServiceImpl implements EtatCommandeService {
         return findByCode("FINALISED");
     }
 
-
-
 }

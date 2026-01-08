@@ -3,6 +3,7 @@ package com.example.tp2.service.impl;
 import com.example.tp2.dao.PaiementDao;
 import com.example.tp2.entity.Paiement;
 import com.example.tp2.service.facade.PaiementService;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +14,11 @@ public class PaiementServiceImpl implements PaiementService {
 
     public PaiementServiceImpl(PaiementDao paiementDao) {
         this.paiementDao = paiementDao;
+    }
+
+    @Override
+    public List<Paiement> findAll() {
+        return paiementDao.findAll();
     }
 
     @Override
@@ -34,9 +40,10 @@ public class PaiementServiceImpl implements PaiementService {
         return paiementDao.findByCommandeReference(commandeReference);
     }
 
+    @Transactional
     @Override
-    public int deleteByCommandeReference(String reference) {
-        return paiementDao.deleteByCommandeReference(reference);
+    public int deleteByCommandeReference(String commandeReference) {
+        return paiementDao.deleteByCommandeReference(commandeReference);
     }
 
 }

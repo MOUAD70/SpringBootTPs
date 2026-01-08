@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface CommandeDao extends JpaRepository<Commande, Long> {
     Commande findByReference(String reference);
-    List<Commande> findByEtatCommandeCode(String code);
+    List<Commande> findByEtatCommandeCode(String etatCommandeCode);
 }

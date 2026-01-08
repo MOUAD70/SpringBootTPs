@@ -1,9 +1,6 @@
 package com.example.tp2.entity;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -15,6 +12,9 @@ public class Paiement {
     private String code;
     private Date datePaiement;
     private BigDecimal montant;
+
+    @ManyToOne
+    private Commande commande;
 
     public Long getId() {
         return id;
@@ -46,5 +46,13 @@ public class Paiement {
 
     public void setMontant(BigDecimal montant) {
         this.montant = montant;
+    }
+
+    public Commande getCommande() {
+        return commande;
+    }
+
+    public void setCommande(Commande commande) {
+        this.commande = commande;
     }
 }
