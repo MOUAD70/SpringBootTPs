@@ -24,7 +24,7 @@ public class CommandeServiceImpl implements CommandeService {
 
     @Override
     public int save(Commande commande) {
-        if (commande.getRef() != null) {
+        if (dao.findByRef(commande.getRef()) != null ) {
             return -1;
         }else {
             dao.save(commande);
