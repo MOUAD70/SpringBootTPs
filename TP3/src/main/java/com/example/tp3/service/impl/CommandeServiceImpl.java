@@ -49,9 +49,6 @@ public class CommandeServiceImpl implements CommandeService {
         }
     }
 
-
-
-
     private CommandeDao dao;
     private EtatCommandeService etatCommandeService;
     private CommandeItemService commandeItemService;
