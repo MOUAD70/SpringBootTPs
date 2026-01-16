@@ -3,9 +3,11 @@ package com.example.tp3.service.impl;
 import com.example.tp3.dao.CommandeDao;
 import com.example.tp3.entity.Commande;
 import com.example.tp3.entity.CommandeItem;
+import com.example.tp3.entity.Paiement;
 import com.example.tp3.service.facade.CommandeItemService;
 import com.example.tp3.service.facade.CommandeService;
 import com.example.tp3.service.facade.EtatCommandeService;
+import com.example.tp3.service.facade.PaiementService;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -21,7 +23,13 @@ public class CommandeServiceImpl implements CommandeService {
 
     @Override
     public Commande findByRef(String ref) {
-        return dao.findByRef(ref);
+        Commande commande = dao.findByRef(ref);
+        if (commande != null) {
+            commande.setCommandeItems(commandeItemService.findByCommandeRef(commande.getRef()));
+            List<Paiement> paiements = paiementService.findByCommandeRef(commande.getRef());
+        }
+
+        return commande;
     }
 
     @Override
@@ -52,10 +60,12 @@ public class CommandeServiceImpl implements CommandeService {
     private CommandeDao dao;
     private EtatCommandeService etatCommandeService;
     private CommandeItemService commandeItemService;
+    private PaiementService paiementService;
 
-    public CommandeServiceImpl(CommandeDao dao, EtatCommandeService etatCommandeService, CommandeItemService commandeItemService) {
+    public CommandeServiceImpl(CommandeDao dao, EtatCommandeService etatCommandeService, CommandeItemService commandeItemService, PaiementService paiementService) {
         this.dao = dao;
         this.etatCommandeService = etatCommandeService;
         this.commandeItemService = commandeItemService;
+        this.paiementService = paiementService;
     }
 }

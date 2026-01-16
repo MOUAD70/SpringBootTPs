@@ -5,8 +5,15 @@ import com.example.tp3.entity.CommandeItem;
 import com.example.tp3.service.facade.CommandeItemService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class CommandeItemServiceImpl implements CommandeItemService {
+
+    @Override
+    public List<CommandeItem> findByCommandeRef(String ref) {
+        return dao.findByCommandeRef(ref);
+    }
 
     @Override
     public void save(CommandeItem commandeItem) {
