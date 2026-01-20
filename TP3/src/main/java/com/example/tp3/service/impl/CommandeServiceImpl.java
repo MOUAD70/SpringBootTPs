@@ -8,6 +8,7 @@ import com.example.tp3.service.facade.CommandeItemService;
 import com.example.tp3.service.facade.CommandeService;
 import com.example.tp3.service.facade.EtatCommandeService;
 import com.example.tp3.service.facade.PaiementService;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
@@ -53,6 +54,19 @@ public class CommandeServiceImpl implements CommandeService {
                     commandeItemService.save(item);
                 }
             }
+            return 1;
+        }
+    }
+
+    @Transactional
+    @Override
+    public int delete(String commandeRef) {
+        Commande commande = findByRef(commandeRef);
+        if (commande.getTotalPaye().compareTo(BigDecimal.ZERO) != 0) return -1;
+        else {
+            dao.delete(commande);
+            commandeItemService.deleteByCommandeRef(commandeRef);
+            paiementService.deleteByCommandeRef(commandeRef);
             return 1;
         }
     }

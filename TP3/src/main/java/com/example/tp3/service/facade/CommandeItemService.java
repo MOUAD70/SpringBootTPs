@@ -8,4 +8,7 @@ public interface CommandeItemService {
     List<CommandeItem> findByCommandeRef(String ref);
 
     void save(CommandeItem commandeItem);
+
+
+    int deleteByCommandeRef(String commandeRef);
 }

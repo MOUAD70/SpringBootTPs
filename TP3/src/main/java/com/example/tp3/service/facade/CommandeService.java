@@ -10,4 +10,6 @@ public interface CommandeService {
     Commande findByRef(String ref);
 
     int save(Commande commande);
+
+    int delete(String commandeRef);
 }

@@ -11,6 +11,11 @@ import java.util.List;
 public class PaiementServiceImpl implements PaiementService {
 
     @Override
+    public int deleteByCommandeRef(String commandeRef) {
+        return dao.deleteByCommandeRef(commandeRef);
+    }
+
+    @Override
     public List<Paiement> findByCommandeRef(String ref) {
         return dao.findByCommandeRef(ref);
     }
@@ -20,4 +25,6 @@ public class PaiementServiceImpl implements PaiementService {
     public PaiementServiceImpl(PaiementDao dao) {
         this.dao = dao;
     }
+
+
 }
